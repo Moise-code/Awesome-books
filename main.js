@@ -1,8 +1,8 @@
-let books = [];
-let awesomeBooks = document.querySelector('#awesom-boks')
+let books = JSON.parse(localStorage.getItem('books')) || [];
+let awesomeBooks = document.querySelector('#awesome-books')
 
 
-function display(book){
+function display(book) {
     awesomeBooks.innerHTML+=`
 
     <li id="${book.id}">
@@ -17,8 +17,9 @@ function display(book){
 
 function add(book){
     display(book);
-    books.push(book)
-    removeDom(awesomeBooks)
+    books.push(book);
+    localStorage.setItem('books', JSON.stringify(books));
+    removeDom(awesomeBooks);
 }
 
 function removeDom(element){
@@ -28,16 +29,16 @@ function removeDom(element){
             let parent = e.target.parentNode;
             remove(parent.id)
             parent.remove();
-
         })
     })
 }
 
-function remove(id){
+function remove(id) {
     books = books.filter(book => book.id !== id);
+    localStorage.setItem('books', JSON.stringify(books));
 }
 
-document.querySelector('form').onsubmit = (e) =>{
+document.querySelector('form').onsubmit = (e) => {
     e.preventDefault();
     const{title,author} = e.target
     add({
@@ -47,4 +48,10 @@ document.querySelector('form').onsubmit = (e) =>{
     })
     e.target.title.value = '';
     e.target.author.value = '';
+}
+
+window.onload = function init() {
+    for(var i=0; i<books.length; i++) {
+        display(books[i]);
+    }
 }
