@@ -10,19 +10,6 @@ function Book(title, author, id) {
 }
 
 /* Display an added book to the UI */
-// function display(book) {
-//   awesomeBooks.innerHTML += `
-
-//     <li id="${book.id}">
-//     <h2>${book.title}</h2>
-//     <h3>${book.author}</h3>
-//     <button class="btn">remove</button>
-//     <hr>
-//     </li>
-
-//     `;
-// }
-
 function display(book) {
   awesomeBooks.innerHTML += `
 
