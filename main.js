@@ -1,9 +1,9 @@
 const awesomeBooks = document.querySelector('#awesome-books');
 class Book {
   constructor() {
-    this.title = null;
-    this.author = null;
-    this.id = null;
+    // this.title = null;
+    // this.author = null;
+    // this.id = null;
 
     this.formSelector = document.querySelector('form');
     this.titleSelector = document.getElementById('title');
@@ -97,6 +97,7 @@ formSubmitted() {
 }
 
 
+
 /*
 Listen to the keyup event of the title input box and add it
 to the local storage to use it when reloading
@@ -120,31 +121,28 @@ addEventListenerForAuthor() {
   });
 }
 
+populateBooksOnload(){
+    this.books.forEach((book) => {
+        let b = new Book();
+        b.title = book.title;
+        b.author = book.author;
+        b.id = book.id;
+        b.display();
+      });
+    
+      document.getElementById('title').value = this.title;
+      document.getElementById('author').value = this.author;
+      this.removeDom(awesomeBooks);
 }
 
-
+}
 
 /*
 Display books, title and author variables when the window loads
 */
-/*window.onload = function init() {
-
-  books.forEach((book) => {
-    let b = new Book();
-    b.title = book.title;
-    b.author = book.author;
-    b.id = book.id;
-    b.display();
-  });
-
-  document.getElementById('title').value = title;
-  document.getElementById('author').value = author;
-  removeDom(awesomeBooks);
-};*/
-
-
 
 let book = new Book();
 book.formSubmitted();
 book.addEventListenerForTitle();
 book.addEventListenerForAuthor();
+window.onload = book.populateBooksOnload();
