@@ -1,45 +1,54 @@
-let books = JSON.parse(localStorage.getItem('booksLocalStorage')) || [];
 const awesomeBooks = document.querySelector('#awesome-books');
-const title = localStorage.getItem('currentTitle') || null;
-const author = localStorage.getItem('currentAuthor') || null;
+class Book {
+  constructor() {
+    this.title = null;
+    this.author = null;
+    this.id = null;
 
-function Book(title, author, id) {
-  this.title = title;
-  this.author = author;
-  this.id = id;
-}
+    this.formSelector = document.querySelector('form');
+    this.titleSelector = document.getElementById('title');
+    this.authorSelector = document.getElementById('author');
+    this.allBtnSelector = awesomeBooks.querySelectorAll('.btn');
 
-/* Display an added book to the UI */
-function display(book) {
-  awesomeBooks.innerHTML += `
+    this.books = JSON.parse(localStorage.getItem('booksLocalStorage')) || [];
+    this.title = localStorage.getItem('currentTitle') || null;
+    this.author = localStorage.getItem('currentAuthor') || null;
+  }
 
-    <li id="${book.id}">
-    <h2>${book.title}</h2>
-    <h3>${book.author}</h3>
-    <button class="btn">remove</button>
-    <hr>
-    </li>
-
-    `;
-}
+  /* Display an added book to the UI */
+  display() {
+    awesomeBooks.innerHTML += `
+  
+      <li id="${this.id}">
+      <h2>${this.title}</h2>
+      <h3>${this.author}</h3>
+      <button class="btn">remove</button>
+      <hr>
+      </li>
+  
+      `;
+  }
 
 /*
 Filter out a removed book from an array of books contianed in each list item
 - add new array of books (with one less book) to the local storage
 */
-function remove(id) {
-  books = books.filter((book) => book.id !== id);
-  localStorage.setItem('booksLocalStorage', JSON.stringify(books));
+remove(id) {
+  this.books = this.books.filter((book) => book.id !== id);
+  localStorage.setItem('booksLocalStorage', JSON.stringify(this.books));
 }
 
 /*
 Initialize remove button event listeners
 */
-function removeDom(element) {
-  element.querySelectorAll('.btn').forEach((btn) => {
+removeDom() {
+  this.allBtnSelector = awesomeBooks.querySelectorAll('.btn');
+  console.log(this.allBtnSelector)
+  this.allBtnSelector.forEach((btn) => {
     btn.addEventListener('click', (e) => {
       const parent = e.target.parentNode;
-      remove(parent.id);
+      console.log(parent)
+      this.remove(parent.id);
       parent.remove();
     });
   });
@@ -54,53 +63,88 @@ Add a book object to the books array
 - initialize event listeners for the buttons created when adding new books
 */
 
-function add(book) {
-  display(book);
-  books.push(book);
-  localStorage.setItem('booksLocalStorage', JSON.stringify(books));
+add(bookObj) {
+  this.display();
+  this.books.push(bookObj);
+  localStorage.setItem('booksLocalStorage', JSON.stringify(this.books));
   localStorage.setItem('currentTitle', '');
   localStorage.setItem('currentAuthor', '');
-  removeDom(awesomeBooks);
+  this.removeDom();
 }
 
 /*
 Create a Book object and add it to the array
 */
-document.querySelector('form').onsubmit = (e) => {
-  e.preventDefault();
-  const { title, author } = e.target;
-  add(new Book(title.value, author.value, Date.now().toString()));
-  e.target.title.value = '';
-  e.target.author.value = '';
-};
+formSubmitted() {
+  this.formSelector.onsubmit = (e) => {
+    e.preventDefault();
+    const { title, author } = e.target;
+    let book = new Book();
+    book.title = title.value;
+    book.author = author.value;
+    book.id = Date.now().toString();
+
+    let bookObj = {
+      title: title.value,
+      author: author.value,
+      id: Date.now().toString()
+    }
+    //this.add(new Book(title.value, author.value, Date.now().toString()));
+    book.add(bookObj);
+    e.target.title.value = '';
+    e.target.author.value = '';
+  };
+}
+
 
 /*
 Listen to the keyup event of the title input box and add it
 to the local storage to use it when reloading
 */
-document.getElementById('title').addEventListener('keyup', (e) => {
-  e.preventDefault();
-  localStorage.setItem('currentTitle', e.target.value);
-});
+addEventListenerForTitle() {
+  this.titleSelector.addEventListener('keyup', (e) => {
+    e.preventDefault();
+    localStorage.setItem('currentTitle', e.target.value);
+  });
+}
+
 
 /*
 Listen to the keyup event of the author input box and add it
 to the local storage to use it when reloading
 */
-document.getElementById('author').addEventListener('keyup', (e) => {
-  e.preventDefault();
-  localStorage.setItem('currentAuthor', e.target.value);
-});
+addEventListenerForAuthor() {
+  this.authorSelector.addEventListener('keyup', (e) => {
+    e.preventDefault();
+    localStorage.setItem('currentAuthor', e.target.value);
+  });
+}
+
+}
+
+
 
 /*
 Display books, title and author variables when the window loads
 */
-window.onload = function init() {
+/*window.onload = function init() {
+
   books.forEach((book) => {
-    display(book);
+    let b = new Book();
+    b.title = book.title;
+    b.author = book.author;
+    b.id = book.id;
+    b.display();
   });
 
   document.getElementById('title').value = title;
   document.getElementById('author').value = author;
   removeDom(awesomeBooks);
-};
+};*/
+
+
+
+let book = new Book();
+book.formSubmitted();
+book.addEventListenerForTitle();
+book.addEventListenerForAuthor();
