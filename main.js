@@ -15,10 +15,15 @@ function display(book){
     `
 }
 
+
 function add(book){
     display(book);
     books.push(book)
     removeDom(awesomeBooks)
+
+    window.localStorage.setItem('books',JSON.stringify(books))
+
+    console.log(books)
 }
 
 function removeDom(element){
@@ -48,3 +53,4 @@ document.querySelector('form').onsubmit = (e) =>{
     e.target.title.value = '';
     e.target.author.value = '';
 }
+
