@@ -64,17 +64,18 @@ body {
   background-color: white;
   align-items: center;
   gap: 1rem;
-  padding: 3rem;
+  padding: 3rem 3rem 0 3rem;
   width: 100vw;
-
-  /* margin-top: 2rem; */
 }
 
-.added-book {
+.added-book,
+.form-container {
   width: 100%;
 }
 
-.added-book h1 {
+.added-book h1,
+.form-container h1,
+.contact-info h1 {
   text-align: center;
   margin-bottom: 0.6rem;
 }
@@ -82,6 +83,10 @@ body {
 .added-book ul {
   border: 2px solid black;
   padding: 1rem 0;
+}
+
+.added-book ul,
+form {
   width: 70vw;
   margin: auto;
 }
@@ -111,16 +116,16 @@ body {
   align-items: center;
 }
 
-.form-container > h1 {
+/* .form-container > h1 {
   margin-bottom: 0.6rem;
-}
+} */
 
 form > * {
   border: 2px solid black;
 }
 
 form > input {
-  width: 40vw;
+  width: 100%;
   padding: 0.5em;
 }
 
@@ -150,8 +155,9 @@ form > input {
   }
 }
 
-.contact {
-  margin-bottom: 3.5rem;
+.contact,
+.book {
+  margin-bottom: 4.5rem;
 }
 
 .contact-info {
@@ -159,12 +165,9 @@ form > input {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  padding: 3rem;
-  width: 100vw;
-}
 
-.contact-info h1 {
-  padding-bottom: 20px;
+  /* padding: 3rem; */
+  width: 100vw;
 }
 
 .footer {
@@ -175,4 +178,14 @@ form > input {
   width: calc(100% - 16px);
   padding: 1rem;
   background-color: white;
+  z-index: 5;
+}
+
+.content-cover {
+  position: fixed;
+  bottom: 0;
+  height: 0.6rem;
+  width: 100%;
+  background-color: white;
+  z-index: 4;
 }

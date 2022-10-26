@@ -128,7 +128,7 @@ to the local storage to use it when reloading
 
   populateBooksOnload() {
     this.loadListPage();
-    this.startTime();
+    Book.startTime();
     this.books.forEach((book) => {
       const b = new Book();
       b.title = book.title;
@@ -157,22 +157,22 @@ to the local storage to use it when reloading
   }
 
   addEventListenerForNavigation() {
-    this.navigationSelector.addEventListener("click", (e) => {
+    this.navigationSelector.addEventListener('click', (e) => {
       e.preventDefault();
-      if(e.target && e.target.textContent == "List") {
-          this.addSection.style.display = 'block';
-          this.formSection.style.display = 'none';
-          this.contactSection.style.display = 'none';
-      } else if(e.target && e.target.textContent == "Add New") {
+      if (e.target && e.target.textContent === 'List') {
+        this.addSection.style.display = 'block';
+        this.formSection.style.display = 'none';
+        this.contactSection.style.display = 'none';
+      } else if (e.target && e.target.textContent === 'Add New') {
         this.addSection.style.display = 'none';
         this.formSection.style.display = 'block';
         this.contactSection.style.display = 'none';
-      } else if(e.target && e.target.textContent == "Contact") {
+      } else if (e.target && e.target.textContent === 'Contact') {
         this.addSection.style.display = 'none';
         this.formSection.style.display = 'none';
         this.contactSection.style.display = 'block';
       }
-  });
+    });
   }
 
   loadListPage() {
@@ -181,25 +181,23 @@ to the local storage to use it when reloading
     this.contactSection.style.display = 'none';
   }
 
-  getDateTimeString() {
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth(); //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var dateString = months[month]+ ' ' + day+'th ' + year + ', ' + dateObj.getHours()+':'+dateObj.getMinutes()+':'+dateObj.getSeconds();
+  static getDateTimeString() {
+    const dateObj = new Date();
+    const month = dateObj.getUTCMonth(); // months from 1-12
+    const day = dateObj.getUTCDate();
+    const year = dateObj.getUTCFullYear();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const dateString = `${months[month]} ${day}th ${year}, ${dateObj.getHours()}:${dateObj.getMinutes()}:${dateObj.getSeconds()}`;
     return dateString;
   }
-  startTime() {
+
+  static startTime() {
     setInterval(() => {
-      document.getElementById('timer').innerHTML = this.getDateTimeString()
-    }, 
+      document.getElementById('timer').innerHTML = Book.getDateTimeString();
+    },
     1000);
   }
-  
 }
-
-
 
 /*
 Display books, title and author variables when the window loads
@@ -210,6 +208,6 @@ book.formSubmitted();
 book.addEventListenerForTitle();
 book.addEventListenerForAuthor();
 book.addEventListenerForNavigation();
-//book.addEventListenerForAddNavigation();
-//book.addEventListenerForContactNavigation();
+// book.addEventListenerForAddNavigation();
+// book.addEventListenerForContactNavigation();
 window.onload = book.populateBooksOnload();
