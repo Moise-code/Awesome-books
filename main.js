@@ -10,6 +10,14 @@ class Book {
     this.books = JSON.parse(localStorage.getItem('booksLocalStorage')) || [];
     this.title = localStorage.getItem('currentTitle') || null;
     this.author = localStorage.getItem('currentAuthor') || null;
+    this.listSelector = document.getElementById('list-navigation');
+    this.addSeclector = document.getElementById('add-navigation');
+    this.contactSeclector = document.getElementById('contact-navigation');
+    this.navigationSelector = document.getElementById('navigation');
+
+    this.addSection = document.getElementById('added-book');
+    this.formSection = document.getElementById('form-container');
+    this.contactSection = document.getElementById('contact');
   }
 
   /* Display an added book to the UI */
@@ -69,6 +77,7 @@ Add a book object to the books array
     localStorage.setItem('currentAuthor', '');
     this.removeDom();
     this.addBorderToBooks();
+    this.loadListPage();
   }
 
   /*
@@ -118,6 +127,8 @@ to the local storage to use it when reloading
   }
 
   populateBooksOnload() {
+    this.loadListPage();
+    this.startTime();
     this.books.forEach((book) => {
       const b = new Book();
       b.title = book.title;
@@ -144,7 +155,51 @@ to the local storage to use it when reloading
   addBorderToBooks() {
     this.awesomeBooks.style.border = '2px solid black';
   }
+
+  addEventListenerForNavigation() {
+    this.navigationSelector.addEventListener("click", (e) => {
+      e.preventDefault();
+      if(e.target && e.target.textContent == "List") {
+          this.addSection.style.display = 'block';
+          this.formSection.style.display = 'none';
+          this.contactSection.style.display = 'none';
+      } else if(e.target && e.target.textContent == "Add New") {
+        this.addSection.style.display = 'none';
+        this.formSection.style.display = 'block';
+        this.contactSection.style.display = 'none';
+      } else if(e.target && e.target.textContent == "Contact") {
+        this.addSection.style.display = 'none';
+        this.formSection.style.display = 'none';
+        this.contactSection.style.display = 'block';
+      }
+  });
+  }
+
+  loadListPage() {
+    this.addSection.style.display = 'block';
+    this.formSection.style.display = 'none';
+    this.contactSection.style.display = 'none';
+  }
+
+  getDateTimeString() {
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth(); //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var dateString = months[month]+ ' ' + day+'th ' + year + ', ' + dateObj.getHours()+':'+dateObj.getMinutes()+':'+dateObj.getSeconds();
+    return dateString;
+  }
+  startTime() {
+    setInterval(() => {
+      document.getElementById('timer').innerHTML = this.getDateTimeString()
+    }, 
+    1000);
+  }
+  
 }
+
+
 
 /*
 Display books, title and author variables when the window loads
@@ -154,4 +209,7 @@ const book = new Book();
 book.formSubmitted();
 book.addEventListenerForTitle();
 book.addEventListenerForAuthor();
+book.addEventListenerForNavigation();
+//book.addEventListenerForAddNavigation();
+//book.addEventListenerForContactNavigation();
 window.onload = book.populateBooksOnload();

@@ -70,13 +70,6 @@ body {
   /* margin-top: 2rem; */
 }
 
-.book hr {
-  fill: black;
-  background-color: black;
-  height: 4px;
-  width: 100px;
-}
-
 .added-book {
   width: 100%;
 }
@@ -157,6 +150,10 @@ form > input {
   }
 }
 
+.contact {
+  margin-bottom: 3.5rem;
+}
+
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -177,4 +174,5 @@ form > input {
   border: 2px solid black;
   width: calc(100% - 16px);
   padding: 1rem;
+  background-color: white;
 }
