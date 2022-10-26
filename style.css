@@ -8,6 +8,44 @@ body {
   width: 100%;
 }
 
+.navigation {
+  padding: 1rem;
+  border: 2px solid black;
+  margin: .5rem;
+}
+
+.navigation > ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.navigation > ul li {
+  list-style: none;
+}
+
+.navigation > ul li:not(:first-child) {
+  margin-left: 1rem;
+  border-right: 2px solid black;
+  padding-right: 1rem;
+}
+
+.navigation > ul li:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+
+
+.navigation > ul li a {
+  text-decoration: none;
+  color: black;
+}
+
 .book {
   display: flex;
   flex-direction: column;
@@ -112,3 +150,4 @@ form > input {
     transform: scale(1, 1);
   }
 }
+
