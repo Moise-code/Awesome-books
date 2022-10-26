@@ -20,10 +20,8 @@ class Book {
     awesomeBooks.innerHTML += `
   
       <li id="${this.id}">
-      <h2>${this.title}</h2>
-      <h3>${this.author}</h3>
+      <h2>"${this.title}"  by   ${this.author}</h2>
       <button class="btn">remove</button>
-      <hr>
       </li>
   
       `;
