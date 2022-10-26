@@ -93,8 +93,8 @@ form > input {
 
 .added-book h3 {
   text-align: center;
-  width:30vw;
-  margin:0 auto;
+  width: 30vw;
+  margin: 0 auto;
   color: red;
   animation: zoom-in-zoom-out 1s ease-out infinite;
 }
