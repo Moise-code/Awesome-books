@@ -17,6 +17,13 @@ body {
   padding: 3rem;
 }
 
+.book hr {
+  fill: black;
+  background-color: black;
+  height: 4px;
+  width: 100px;
+}
+
 .added-book {
   width: 100%;
 }
@@ -29,6 +36,13 @@ body {
 .added-book ul {
   border: 2px solid black;
   padding: 1rem 0;
+  width: 70vw;
+  margin: auto;
+}
+
+.form-container button {
+  float: right;
+  padding: 0.25em 1em;
 }
 
 .added-book ul li {
@@ -47,9 +61,36 @@ body {
 .added-book ul li > button {
   padding: 0.5rem;
   margin-right: 0.5rem;
-  box-shadow: 3px 2px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .added-book ul li:nth-child(2n+1) {
   background-color: grey;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.form-container > h1 {
+  margin-bottom: 0.6rem;
+}
+
+form > * {
+  border: 2px solid black;
+}
+
+form > input {
+  width: 40vw;
+  padding: 0.5em;
+}
+
+.button-shadow {
+  box-shadow: 3px 4px;
+}
+
+.added-book h3 {
+  text-align: center;
 }
