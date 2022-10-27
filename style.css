@@ -165,8 +165,6 @@ form > input {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-
-  /* padding: 3rem; */
   width: 100vw;
 }
 

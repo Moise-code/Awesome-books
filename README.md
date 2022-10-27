@@ -19,23 +19,6 @@ local storage
 
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-### Setup
-
-
-
-### Install
-
-NODE MODULE 
-PACKAGE JSON FILE
-
-### Usage
-
-### Run tests
-
-### Deployment
-
 ## Authors
 
 ## Byiringiro Moise

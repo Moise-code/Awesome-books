@@ -1,4 +1,3 @@
-// const awesomeBooks = document.querySelector('#awesome-books');
 class Book {
   constructor() {
     this.awesomeBooks = document.querySelector('#awesome-books');
@@ -183,7 +182,7 @@ to the local storage to use it when reloading
 
   static getDateTimeString() {
     const dateObj = new Date();
-    const month = dateObj.getUTCMonth(); // months from 1-12
+    const month = dateObj.getUTCMonth(); // months from 0-11
     const day = dateObj.getUTCDate();
     const year = dateObj.getUTCFullYear();
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -208,6 +207,4 @@ book.formSubmitted();
 book.addEventListenerForTitle();
 book.addEventListenerForAuthor();
 book.addEventListenerForNavigation();
-// book.addEventListenerForAddNavigation();
-// book.addEventListenerForContactNavigation();
 window.onload = book.populateBooksOnload();
